@@ -10,14 +10,20 @@ class SheetDemo extends React.Component<
   {},
   {
     animated: boolean;
+    compact: boolean;
     gap: boolean;
+    headerBar: boolean;
+    headerShadow: boolean;
     portal: boolean;
     visible: boolean;
   }
 > {
   state = {
     animated: true,
+    compact: false,
     gap: false,
+    headerBar: false,
+    headerShadow: false,
     portal: false,
     visible: false,
   };
@@ -30,8 +36,20 @@ class SheetDemo extends React.Component<
     this.setState(({ animated }) => ({ animated: !animated }));
   };
 
+  handleCompactChange = () => {
+    this.setState(({ compact }) => ({ compact: !compact }));
+  };
+
   handleGapChange = () => {
     this.setState(({ gap }) => ({ gap: !gap }));
+  };
+
+  handleHeaderBarChange = () => {
+    this.setState(({ headerBar }) => ({ headerBar: !headerBar }));
+  };
+
+  handleHeaderBarShadowChange = () => {
+    this.setState(({ headerShadow }) => ({ headerShadow: !headerShadow }));
   };
 
   handlePortalChange = () => {
@@ -39,7 +57,7 @@ class SheetDemo extends React.Component<
   };
 
   render() {
-    const { animated, gap, portal, visible } = this.state;
+    const { animated, compact, gap, headerBar, headerShadow, portal, visible } = this.state;
 
     return (
       <SheetArea>
@@ -61,6 +79,29 @@ class SheetDemo extends React.Component<
           />
 
           <CheckBox
+            noSpacing
+            name="header"
+            label="Show header bar"
+            checked={headerBar}
+            onChange={this.handleHeaderBarChange}
+          />
+
+          <CheckBox
+            noSpacing
+            name="headerShadow"
+            label="Show shadow on header bar"
+            checked={headerShadow}
+            onChange={this.handleHeaderBarShadowChange}
+          />
+
+          <CheckBox
+            name="compact"
+            label="Render with compact spacing"
+            checked={compact}
+            onChange={this.handleCompactChange}
+          />
+
+          <CheckBox
             name="animated"
             label="Render with animation"
             checked={animated}
@@ -73,6 +114,9 @@ class SheetDemo extends React.Component<
             portal={portal}
             visible={visible}
             onClose={this.handleClick}
+            headerBar={headerBar && <Text>This is the header!</Text>}
+            headerShadow={headerShadow}
+            compact={compact}
           >
             <Spacing inner vertical={12}>
               <Text>This is in a sheet!</Text>
