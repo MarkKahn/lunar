@@ -29,7 +29,7 @@ export type Props = {
   gap?: boolean;
   /** Determines if the sheet animates in/out. */
   noAnimation?: boolean;
-  /** Content of the header bar */
+  /** Content of the header */
   headerBar?: React.ReactNode;
   /** Render with reduced padding */
   compact?: boolean;
